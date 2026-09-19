@@ -784,8 +784,7 @@ def tab_choropleth(df: pd.DataFrame, summaries: dict, year_range, sel_regions):
     top15 = (cy_df[["country", "region", map_metric]].dropna()
              .sort_values(map_metric, ascending=False).head(15).reset_index(drop=True))
     top15.index += 1
-    st.dataframe(top15.style.background_gradient(cmap="Blues", subset=[map_metric]),
-                 use_container_width=True, height=420)
+    st.dataframe(top15, use_container_width=True, height=420)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
