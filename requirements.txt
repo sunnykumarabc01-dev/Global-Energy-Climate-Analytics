@@ -1,0 +1,20 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# requirements.txt
+# Global Energy & Climate Action Analytics Platform
+# IBM SkillsBuild Data Analytics with AI Internship 2026
+# Student: Sunny Kumar  |  ID: IBMUEDA1428
+# Submission: BharatCares / AICTE Virtual Internship Final Submission
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Web Application Framework
+streamlit>=1.35.0
+
+# Data Manipulation & Numerical Computing
+pandas>=2.1.0
+numpy>=1.26.0
+
+# Interactive Visualisation
+plotly>=5.20.0
+
+# Machine Learning
+scikit-learn>=1.4.0
