@@ -42,70 +42,187 @@ st.set_page_config(
 # ─────────────────────────────────────────────────────────────────────────────
 st.markdown("""
 <style>
-html, body, [data-testid="stAppViewContainer"],
-[data-testid="stMain"], [data-testid="stMainBlockContainer"] {
+/* ── 1. Full-page dark canvas ─────────────────────────────────────────────── */
+html, body,
+[data-testid="stAppViewContainer"],
+[data-testid="stMain"],
+[data-testid="stMainBlockContainer"],
+[data-testid="stVerticalBlock"],
+[data-testid="stVerticalBlockBorderWrapper"],
+[data-testid="stBottom"],
+section.main > div {
     background-color: #0d1117 !important;
     color: #e6edf3 !important;
 }
+
+/* ── 2. Zero-gap top padding — kills every white bleed on cloud ───────────── */
+.block-container,
+[data-testid="stMainBlockContainer"] > div:first-child {
+    padding-top: 0.6rem !important;
+    padding-bottom: 0.5rem !important;
+    max-width: 100% !important;
+}
+[data-testid="stAppViewContainer"] > section:nth-child(2) {
+    padding-top: 0rem !important;
+}
+
+/* ── 3. Sidebar ──────────────────────────────────────────────────────────── */
 [data-testid="stSidebar"] {
     background-color: #161b22 !important;
     border-right: 1px solid #30363d !important;
 }
+[data-testid="stSidebar"] > div:first-child {
+    padding-top: 1rem !important;
+}
+
+/* ── 4. Metric cards ─────────────────────────────────────────────────────── */
 [data-testid="stMetric"] {
-    background: linear-gradient(135deg,#161b22 0%,#1c2128 100%);
+    background: linear-gradient(135deg, #161b22 0%, #1c2128 100%);
     border: 1px solid #30363d;
     border-radius: 10px;
     padding: 14px 18px !important;
 }
-[data-testid="stMetricLabel"] { color: #8b949e !important; font-size: 0.78rem !important; }
-[data-testid="stMetricValue"] { color: #58a6ff !important; font-size: 1.55rem !important; font-weight: 800 !important; }
+[data-testid="stMetricLabel"] {
+    color: #8b949e !important;
+    font-size: 0.78rem !important;
+}
+[data-testid="stMetricValue"] {
+    color: #58a6ff !important;
+    font-size: 1.55rem !important;
+    font-weight: 800 !important;
+}
 [data-testid="stMetricDelta"] { font-size: 0.8rem !important; }
+
+/* ── 5. Tab bar — zero bleed, crisp active line ──────────────────────────── */
+[data-testid="stTabs"] {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+[role="tablist"] {
+    border-bottom: 1px solid #30363d !important;
+    gap: 0 !important;
+    padding-left: 0 !important;
+}
 button[data-baseweb="tab"] {
     background: transparent !important;
     color: #8b949e !important;
-    font-weight: 600;
+    font-weight: 600 !important;
     border-bottom: 2px solid transparent !important;
-    font-size: 0.88rem;
+    font-size: 0.88rem !important;
+    padding: 8px 14px !important;
+    transition: color 0.15s ease, border-color 0.15s ease !important;
+}
+button[data-baseweb="tab"]:hover {
+    color: #c9d1d9 !important;
+    background: rgba(88,166,255,0.04) !important;
 }
 button[data-baseweb="tab"][aria-selected="true"] {
     color: #58a6ff !important;
     border-bottom: 2px solid #58a6ff !important;
     background: rgba(88,166,255,0.06) !important;
 }
-[role="tablist"] { border-bottom: 1px solid #30363d !important; }
-h1 { color: #58a6ff !important; font-size: 2rem !important; font-weight: 800 !important; }
-h2 { color: #79c0ff !important; font-size: 1.45rem !important; }
-h3 { color: #a5d6ff !important; font-size: 1.1rem !important; }
-[data-testid="stDataFrame"] { border: 1px solid #30363d; border-radius: 8px; }
-[data-baseweb="select"] > div, [data-baseweb="input"] > div {
+/* Tab content panel — flush top, no whitespace gap */
+[data-testid="stTabsContent"],
+[data-testid="stTabsContent"] > div {
+    padding-top: 0.75rem !important;
+    background-color: #0d1117 !important;
+}
+
+/* ── 6. Typography ───────────────────────────────────────────────────────── */
+h1 { color: #58a6ff !important; font-size: 2rem !important; font-weight: 800 !important; letter-spacing: -0.5px !important; }
+h2 { color: #79c0ff !important; font-size: 1.45rem !important; font-weight: 700 !important; }
+h3 { color: #a5d6ff !important; font-size: 1.1rem !important; font-weight: 600 !important; }
+p, li, span { color: #c9d1d9 !important; }
+a { color: #58a6ff !important; }
+code { background: #1c2128 !important; color: #a5d6ff !important; border-radius: 4px !important; padding: 2px 5px !important; }
+
+/* ── 7. DataFrames ───────────────────────────────────────────────────────── */
+[data-testid="stDataFrame"],
+[data-testid="stDataFrame"] > div {
+    border: 1px solid #30363d !important;
+    border-radius: 8px !important;
+    background-color: #161b22 !important;
+}
+
+/* ── 8. Form controls ────────────────────────────────────────────────────── */
+[data-baseweb="select"] > div,
+[data-baseweb="input"] > div,
+[data-baseweb="textarea"] > div {
     background-color: #21262d !important;
     border-color: #30363d !important;
     color: #e6edf3 !important;
 }
-[data-testid="stExpander"] {
-    background: #161b22;
-    border: 1px solid #30363d;
-    border-radius: 8px;
+[data-baseweb="select"] svg { fill: #8b949e !important; }
+label,
+.stSelectbox label,
+.stMultiSelect label,
+.stSlider label,
+.stRadio label,
+.stCheckbox label {
+    color: #c9d1d9 !important;
+    font-size: 0.86rem !important;
 }
-[data-testid="stExpander"] summary { color: #79c0ff !important; font-weight: 600; }
-hr { border-color: #30363d !important; }
-[data-testid="stInfo"]    { background: #1c2a3a; border-left: 4px solid #58a6ff; border-radius:6px; }
-[data-testid="stWarning"] { background: #2a2008; border-left: 4px solid #d29922; border-radius:6px; }
-[data-testid="stSuccess"] { background: #0e2d1e; border-left: 4px solid #3fb950; border-radius:6px; }
-[data-testid="stError"]   { background: #2d1a1a; border-left: 4px solid #f78166; border-radius:6px; }
-label, .stSelectbox label, .stMultiSelect label,
-.stSlider label, .stRadio label { color: #c9d1d9 !important; }
-.js-plotly-plot { border-radius: 10px; overflow: hidden; }
+
+/* ── 9. Expanders ────────────────────────────────────────────────────────── */
+[data-testid="stExpander"] {
+    background: #161b22 !important;
+    border: 1px solid #30363d !important;
+    border-radius: 8px !important;
+    margin-bottom: 6px !important;
+}
+[data-testid="stExpander"] summary,
+[data-testid="stExpander"] summary p {
+    color: #79c0ff !important;
+    font-weight: 600 !important;
+}
+[data-testid="stExpander"] > div > div {
+    background: #161b22 !important;
+    padding: 8px 14px !important;
+}
+
+/* ── 10. Alert / info boxes ──────────────────────────────────────────────── */
+hr { border-color: #30363d !important; margin: 12px 0 !important; }
+[data-testid="stInfo"],    div.stInfo    { background: #1c2a3a !important; border-left: 4px solid #58a6ff !important; border-radius: 6px !important; color: #a5d6ff !important; }
+[data-testid="stWarning"], div.stWarning { background: #2a2008 !important; border-left: 4px solid #d29922 !important; border-radius: 6px !important; color: #e3b341 !important; }
+[data-testid="stSuccess"], div.stSuccess { background: #0e2d1e !important; border-left: 4px solid #3fb950 !important; border-radius: 6px !important; color: #56d364 !important; }
+[data-testid="stError"],   div.stError   { background: #2d1a1a !important; border-left: 4px solid #f78166 !important; border-radius: 6px !important; color: #ffa198 !important; }
+
+/* ── 11. Plotly chart containers ─────────────────────────────────────────── */
+.js-plotly-plot,
+.stPlotlyChart,
+[data-testid="stPlotlyChart"] {
+    border-radius: 10px !important;
+    overflow: hidden !important;
+    margin-bottom: 4px !important;
+}
+[data-testid="stPlotlyChart"] > div {
+    background-color: #161b22 !important;
+    border-radius: 10px !important;
+}
+
+/* ── 12. Download button ─────────────────────────────────────────────────── */
+[data-testid="stDownloadButton"] button {
+    background: #21262d !important;
+    color: #58a6ff !important;
+    border: 1px solid #30363d !important;
+    border-radius: 6px !important;
+    font-weight: 600 !important;
+}
+[data-testid="stDownloadButton"] button:hover {
+    background: #30363d !important;
+    border-color: #58a6ff !important;
+}
+
+/* ── 13. Spinner ──────────────────────────────────────────────────────────── */
+[data-testid="stSpinner"] > div {
+    color: #58a6ff !important;
+}
+
+/* ── 14. Scrollbar ───────────────────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: #0d1117; }
 ::-webkit-scrollbar-thumb { background: #30363d; border-radius: 3px; }
-[data-testid="stAppViewContainer"] > section:nth-child(2) {
-    padding-top: 0rem !important;
-}
-.block-container {
-    padding-top: 1rem !important;
-    padding-bottom: 0rem !important;
-}
+::-webkit-scrollbar-thumb:hover { background: #484f58; }
 </style>
 """, unsafe_allow_html=True)
 
