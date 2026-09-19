@@ -42,6 +42,18 @@ st.set_page_config(
 # ─────────────────────────────────────────────────────────────────────────────
 st.markdown("""
 <style>
+/* ── 0. Header transparency & top-gap elimination (cloud-specific) ────────── */
+header[data-testid="stHeader"] {
+    background-color: rgba(0,0,0,0) !important;
+    color: #ffffff !important;
+}
+[data-testid="stAppViewContainer"] {
+    background-color: #0d1117 !important;
+}
+[data-testid="stAppViewContainer"] > section:nth-child(2) {
+    padding-top: 0rem !important;
+}
+
 /* ── 1. Full-page dark canvas ─────────────────────────────────────────────── */
 html, body,
 [data-testid="stAppViewContainer"],
