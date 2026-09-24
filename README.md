@@ -12,7 +12,6 @@
 | **Student Name** | Sunny Kumar |
 | **Internship ID** | IBMUEDA1428 |
 | **Programme** | IBM SkillsBuild Data Analytics with AI Internship 2026 |
-| **Institution** | Swatantrata Senani Shankarlal Agarwal Prabandhan Sah Takniki Mahavidyalay Patna |
 | **Submission Track** | BharatCares / AICTE Virtual Internship Final Submission |
 | **Master File** | `SunnyKumar_GlobalEnergyAnalytics.py` |
 
